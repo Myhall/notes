@@ -20,10 +20,13 @@ class Notes extends React.Component {
 
   render(){
     return (
-      <ul className='notes-list'>
+      <ul className='notes-list list-group'>
         {this.state.list.map((item) => {
-          return <Note  key={item.key} author={item.author} timestamp={item.timestamp} body ={item.body} />
-        })}
+          return <Note
+                    key = {item.key}
+                    author = {item.author}
+                    timestamp = {item.timestamp}
+                    body = {item.body} /> })}
       </ul>
     )
   }

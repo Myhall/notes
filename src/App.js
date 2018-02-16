@@ -9,9 +9,9 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-        <h1 className="App-title">Notes</h1>
+        <header className="jumbotron container-fluid text-center App-header">
+          <h1>Notes</h1>
+          <h5>Simple notes with React and Firebase</h5>
         </header>
           <div className='container'>
             <Notes />
