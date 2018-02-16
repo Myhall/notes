@@ -25,8 +25,8 @@ class Note extends React.Component {
       <div>
         <li key={this.state.id} className='note'>
           <div className='note-author'>Author: {this.state.author}</div>
-          <div className='note-timestamp'>Timestamp: {this.state.timestamp.toString()}</div>
           <div className='note-body'>Text: {this.state.body}</div>
+          <div className='note-timestamp'>{new Date(this.state.timestamp).toString()}</div>
         </li>
       </div>
     )
