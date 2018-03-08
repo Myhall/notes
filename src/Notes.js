@@ -6,8 +6,17 @@ class Notes extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      editing : null,
       list : []
     }
+
+    this.toggleEditing = this.toggleEditing.bind(this);
+  }
+
+  toggleEditing(noteId) {
+    this.setState({
+      editing : noteId
+    })
   }
 
   componentDidMount(){
@@ -20,13 +29,15 @@ class Notes extends React.Component {
 
   render(){
     return (
-      <ul className='notes-list list-group'>
+      <ul className = 'notes-list list-group'>
         {this.state.list.map((item) => {
           return <Note
                     key = {item.key}
                     author = {item.author}
                     timestamp = {item.timestamp}
-                    body = {item.body} /> })}
+                    body = {item.body}
+                    mode = {this.state.editing === item.key ? 'edit' : 'view'}
+                    onClick = {this.toggleEditing.bind(null, item.key)}/> })}
       </ul>
     )
   }
