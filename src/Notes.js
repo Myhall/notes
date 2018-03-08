@@ -25,7 +25,15 @@ class Notes extends React.Component {
       state : 'list',
       asArray : true
       });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.mode !== this.state.mode) {
+      this.setState({
+        mode : nextProps.mode
+      });
     }
+  }
 
   render(){
     return (
