@@ -5,7 +5,7 @@ class Note extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id : '',
+      uid : '',
       author : '',
       timestamp : '',
       body : '',
@@ -17,9 +17,9 @@ class Note extends React.Component {
   }
 
   componentDidMount() {
-    const {id, author, timestamp, body, mode} = this.props;
+    const {uid, author, timestamp, body, mode} = this.props;
     this.setState({
-      id : id,
+      uid : uid,
       author : author,
       timestamp : timestamp,
       body : body,
@@ -33,8 +33,21 @@ class Note extends React.Component {
     })
   }
 
-  handleChange() {
+  handleSubmit(event) {
+    event.preventDefault();
+    const newNote = {
+      uid : this.state.uid,
+      author : this.state.author,
+      timestamp : this.state.author,
+      body : this.state.body};
+    this.props.onNoteSubmit(newNote);
+    this.disableEditMode();
+  }
 
+  handleChange(event) {
+    this.setState({
+      body : event.target.value
+    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -64,12 +77,13 @@ class Note extends React.Component {
                  type = 'text'
                  name = 'Body'
                  defaultValue = {this.state.body}
+                 onChange = {this.handleChange.bind(this)}
                 />
           <div className = 'btn-group btn-sm' >
             <button className = 'btn btn-success'
                     type = 'submit'
                     value = "Submit"
-                    onClick = {this.handleChange()}> OK </button>
+                    onClick = {this.handleSubmit.bind(this)}> OK </button>
             <button className = 'btn btn-danger'
                     onClick = {this.disableEditMode.bind(this)}> Cancel </button>
           </div>
@@ -95,7 +109,7 @@ class Note extends React.Component {
   render() {
     return (
       <div>
-        <li key = {this.state.id}
+        <li key = {this.state.uid}
             className = 'note list-group-item container'
             onClick = {this.props.onClick}>
           {this.renderNote()}
